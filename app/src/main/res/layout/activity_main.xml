@@ -20,7 +20,23 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_main" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:listitem="@layout/entry_view"/>
+
+    <TextView
+        android:id="@+id/no_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="NO DATA SAVED"
+        android:textSize="40dp"
+        android:layout_gravity="bottom"
+        android:visibility="gone"
+        android:gravity="center_horizontal"/>
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"

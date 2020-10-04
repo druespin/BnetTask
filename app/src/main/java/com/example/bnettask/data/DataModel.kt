@@ -1,12 +1,14 @@
 package com.example.bnettask.data
 
+import com.google.gson.annotations.SerializedName
+
 
 data class SessionResponse(
     val status: Int,
     val data: Session,
     val error: String) {
 
-    inner class Session(val sessionId: String)
+    inner class Session(@SerializedName("session") val sessionId: String)
 }
 
 data class Note(

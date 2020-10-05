@@ -1,22 +1,20 @@
 package com.example.bnettask
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.text.BoringLayout.make
 import android.util.Log
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bnettask.adapter.EntryAdapter
 import com.example.bnettask.adapter.ItemClickListener
-import com.example.bnettask.data.Note
+import com.example.bnettask.data.Entry
 import com.example.bnettask.web.ListPresenterImpl
 import com.example.bnettask.web.ListView
 import com.google.android.material.snackbar.Snackbar.make
@@ -28,7 +26,7 @@ class MainActivity : AppCompatActivity(), ItemClickListener, ListView {
     private lateinit var recyclerView: RecyclerView
     private lateinit var prefs: SharedPreferences
 
-
+    private var sessionId: String = "no-id"
     private val presenter = ListPresenterImpl(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,31 +34,37 @@ class MainActivity : AppCompatActivity(), ItemClickListener, ListView {
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
 
+        initView()
 
+        prefs = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE)
+        sessionId = prefs.getString("session_id", "no-id")!!
+
+        if (sessionId == "no-id") {
+            Log.d("Getting data", "Session Id to be defined")
+            presenter.getSessionIdAndData()
+        }
+        else {
+            presenter.getData(sessionId)
+        }
+
+        fab.setOnClickListener {
+            if (sessionId != "no-id") {
+                intent = Intent(this, AddEntryActivity::class.java)
+                intent.putExtra("session_id", sessionId)
+                startActivity(intent)
+            }
+        }
+    }
+
+    private fun initView() {
         adapter = EntryAdapter(ArrayList(), this)
         recyclerView = findViewById(R.id.recycler)
         recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         recyclerView.adapter = adapter
-
-        prefs = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE)
-        val sessionId = prefs.getString("session_id", "no-id")
-
-        if (sessionId == "no-id") {
-            Log.d("Getting data", "Session Id to be defined")
-            presenter.getSessionId()
-        }
-        else if (sessionId != null) {
-            presenter.getData(sessionId)
-        }
-
-        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
-            make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
     }
 
     override fun showIfNoData() {
-        no_data.visibility = View.VISIBLE
+        no_data_message.visibility = View.VISIBLE
         Toast.makeText(this,"No data saved yet", Toast.LENGTH_LONG).show()
     }
 
@@ -69,8 +73,8 @@ class MainActivity : AppCompatActivity(), ItemClickListener, ListView {
         Log.d("SESSION_ID: ", id)
     }
 
-    override fun showNotes(notes: List<Note>) {
-        adapter.setNewData(notes)
+    override fun showEntries(entries: List<Entry>) {
+        adapter.setNewData(entries)
     }
 
     override fun showError(error: String) {
@@ -80,7 +84,17 @@ class MainActivity : AppCompatActivity(), ItemClickListener, ListView {
     }
 
     override fun onItemClick(position: Int) {
-        TODO("Not yet implemented")
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        presenter.getData(sessionId)
+    }
+
+    override fun onDestroy() {
+        presenter.onStop()
+        super.onDestroy()
     }
 
 //

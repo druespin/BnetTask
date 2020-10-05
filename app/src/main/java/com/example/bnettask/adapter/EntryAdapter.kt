@@ -5,26 +5,28 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bnettask.R
-import com.example.bnettask.data.Note
+import com.example.bnettask.data.Entry
 import kotlinx.android.synthetic.main.entry_view.view.*
+import java.sql.Date
+import java.sql.Timestamp
+import java.text.SimpleDateFormat
 
-class EntryAdapter(private val itemsList: ArrayList<Note>,
+class EntryAdapter(private val itemsList: ArrayList<Entry>,
                    private val listener: ItemClickListener) :
 RecyclerView.Adapter<EntryAdapter.ViewHolder>() {
 
-
-    fun setNewData(newData: List<Note>) {
+    fun setNewData(newData: List<Entry>) {
         itemsList.clear()
         itemsList.addAll(newData)
         notifyDataSetChanged()
     }
 
-    fun addItem(item: Note) {
+    fun addItem(item: Entry) {
         itemsList.add(0, item)
         notifyItemInserted(0)
     }
 
-    fun removeItem(item: Note) {
+    fun removeItem(item: Entry) {
         itemsList.remove(item)
         notifyDataSetChanged()
     }
@@ -48,17 +50,26 @@ RecyclerView.Adapter<EntryAdapter.ViewHolder>() {
 
         private var entryId: String? = null
 
-        fun bind(note: Note) {
-            entryId = note.id
-            itemView.created_date.text = note.da
-            itemView.updated_date.text = note.dm
-            itemView.body.text = note.dm
+        fun bind(entry: Entry) {
+            entryId = entry.id
+            itemView.created_date.text = parseDate(entry.da)
+            itemView.updated_date.text = parseDate(entry.dm)
+            if (entry.da == entry.dm) {
+                itemView.updated_date.visibility = View.GONE
+                itemView.updated.visibility = View.GONE
+            }
+            itemView.body.text = entry.body
 
             itemView.setOnClickListener(this)
         }
 
         override fun onClick(v: View?) {
             listener.onItemClick(adapterPosition)
+        }
+
+        private fun parseDate(seconds: String): String {
+            val date = Date(seconds.toLong() * 1000)
+            return date.toString()
         }
     }
 }

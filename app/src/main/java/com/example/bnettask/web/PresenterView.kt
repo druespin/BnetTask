@@ -1,10 +1,10 @@
 package com.example.bnettask.web
 
-import com.example.bnettask.data.Note
+import com.example.bnettask.data.Entry
 
 interface ListView {
 
-    fun showNotes(notes: List<Note>)
+    fun showEntries(entries: List<Entry>)
 
     fun showIfNoData()
 
@@ -16,6 +16,14 @@ interface ListView {
 interface ListPresenter {
 
     fun getData(sessionId: String)
+
+    fun onStop()
+}
+
+
+interface AddEntryPresenter {
+
+    fun addEntry(sessionId: String, body: String)
 
     fun onStop()
 }

@@ -26,6 +26,7 @@
         tools:text="01-01-1900"/>
 
     <TextView
+        android:id="@+id/updated"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/updated_field"
@@ -48,7 +49,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:maxLength="200"
         tools:text="text text text text text text text text text text text text
         text text texttext text text text text text text  text text text text

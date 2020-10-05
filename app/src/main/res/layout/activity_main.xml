@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -20,6 +22,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
@@ -28,15 +31,14 @@
         tools:listitem="@layout/entry_view"/>
 
     <TextView
-        android:id="@+id/no_data"
+        android:id="@+id/no_data_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="NO DATA SAVED"
-        android:textSize="40dp"
-        android:layout_gravity="bottom"
+        android:text="NO DATA SAVED YET\n PLEASE ADD AN ENTRY"
+        android:textSize="24dp"
+        android:layout_gravity="center_vertical"
         android:visibility="gone"
         android:gravity="center_horizontal"/>
-
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -44,6 +46,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:src="@drawable/add_entry_btn" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>

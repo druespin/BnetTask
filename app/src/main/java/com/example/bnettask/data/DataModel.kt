@@ -11,16 +11,16 @@ data class SessionResponse(
     inner class Session(@SerializedName("session") val sessionId: String)
 }
 
-data class Note(
+data class Entry(
     val id: String,
     val body: String,
     val da: String,
     val dm: String
 )
 
-data class NoteResponse(
+data class EntryResponse(
     val status: Int,
-    val data: List<Note>,
+    val data: List<List<Entry>>,
     val error: String
 )
 

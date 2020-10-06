@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bnettask.R
 import com.example.bnettask.data.Entry
+import com.example.bnettask.date.DateParser
 import kotlinx.android.synthetic.main.entry_view.view.*
 import java.sql.Date
 import java.sql.Timestamp
@@ -31,6 +32,10 @@ RecyclerView.Adapter<EntryAdapter.ViewHolder>() {
         notifyDataSetChanged()
     }
 
+    fun getEntryList(): List<Entry> {
+        return itemsList
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.entry_view, parent, false)
@@ -52,8 +57,8 @@ RecyclerView.Adapter<EntryAdapter.ViewHolder>() {
 
         fun bind(entry: Entry) {
             entryId = entry.id
-            itemView.created_date.text = parseDate(entry.da)
-            itemView.updated_date.text = parseDate(entry.dm)
+            itemView.created_date.text = DateParser.parse(entry.da)
+            itemView.updated_date.text = DateParser.parse(entry.dm)
             if (entry.da == entry.dm) {
                 itemView.updated_date.visibility = View.GONE
                 itemView.updated.visibility = View.GONE
@@ -65,11 +70,6 @@ RecyclerView.Adapter<EntryAdapter.ViewHolder>() {
 
         override fun onClick(v: View?) {
             listener.onItemClick(adapterPosition)
-        }
-
-        private fun parseDate(seconds: String): String {
-            val date = Date(seconds.toLong() * 1000)
-            return date.toString()
         }
     }
 }

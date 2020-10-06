@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity(), ItemClickListener, ListView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(findViewById(R.id.toolbar))
 
         initView()
 
@@ -47,7 +46,7 @@ class MainActivity : AppCompatActivity(), ItemClickListener, ListView {
             presenter.getData(sessionId)
         }
 
-        fab.setOnClickListener {
+        add_entry_btn.setOnClickListener {
             if (sessionId != "no-id") {
                 intent = Intent(this, AddEntryActivity::class.java)
                 intent.putExtra("session_id", sessionId)
@@ -64,8 +63,7 @@ class MainActivity : AppCompatActivity(), ItemClickListener, ListView {
     }
 
     override fun showIfNoData() {
-        no_data_message.visibility = View.VISIBLE
-        Toast.makeText(this,"No data saved yet", Toast.LENGTH_LONG).show()
+        no_data_view.visibility = View.VISIBLE
     }
 
     override fun saveSessionId(id: String) {
@@ -84,7 +82,14 @@ class MainActivity : AppCompatActivity(), ItemClickListener, ListView {
     }
 
     override fun onItemClick(position: Int) {
+        val entry = adapter.getEntryList()[position]
+        val details = DetailsFragment.newInstance(entry)
 
+        add_entry_btn.visibility = View.GONE
+
+        supportFragmentManager.beginTransaction()
+            .add(R.id.details_view, details)
+            .commit()
     }
 
     override fun onResume() {

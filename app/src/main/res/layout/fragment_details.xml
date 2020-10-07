@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_margin="24dp"
-    app:cardCornerRadius="8dp">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+    android:clickable="true"
+    android:background="@drawable/details_bg"
+    android:layout_margin="20dp"
+    android:focusable="true">
 
         <LinearLayout
             android:id="@+id/created_date"
@@ -29,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:text="Created:"
+                android:text="@string/created_text"
                 android:layout_marginEnd="12dp"
                 android:layout_marginRight="12dp" />
 
@@ -57,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:text="Updated:"
+                android:text="@string/updated_text"
                 android:layout_marginEnd="12dp"
                 android:layout_marginRight="12dp" />
 
@@ -82,7 +79,7 @@
             android:textColor="@color/white"
             android:layout_margin="20dp"
             android:padding="12dp"
-            tools:text="abcdefg"
+            tools:text="new entry"
             />
 
             <Button
@@ -99,5 +96,4 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

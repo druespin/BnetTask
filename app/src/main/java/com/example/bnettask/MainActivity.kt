@@ -5,18 +5,17 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bnettask.adapter.EntryAdapter
 import com.example.bnettask.adapter.ItemClickListener
 import com.example.bnettask.data.Entry
-import com.example.bnettask.web.ListPresenterImpl
-import com.example.bnettask.web.ListView
+import com.example.bnettask.presenter.ListPresenterImpl
+import com.example.bnettask.presenter.ListView
+import com.example.bnettask.util.NetworkAccess
 import com.google.android.material.snackbar.Snackbar.make
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -38,12 +37,18 @@ class MainActivity : AppCompatActivity(), ItemClickListener, ListView {
         prefs = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE)
         sessionId = prefs.getString("session_id", "no-id")!!
 
-        if (sessionId == "no-id") {
-            Log.d("Getting data", "Session Id to be defined")
-            presenter.getSessionIdAndData()
+        if (NetworkAccess.isNetworkAvailable(this)) {
+
+            if (sessionId == "no-id") {
+                Log.d("Getting data", "Session Id to be defined")
+                presenter.getSessionIdAndData()
+            } else {
+                presenter.getData(sessionId)
+            }
         }
         else {
-            presenter.getData(sessionId)
+            val alertNoConnection = NoConnectionFragment()
+            alertNoConnection.show(supportFragmentManager, "Network issue")
         }
 
         add_entry_btn.setOnClickListener {
@@ -101,21 +106,4 @@ class MainActivity : AppCompatActivity(), ItemClickListener, ListView {
         presenter.onStop()
         super.onDestroy()
     }
-
-//
-//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        menuInflater.inflate(R.menu.menu_main, menu)
-//        return true
-//    }
-//
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        return when (item.itemId) {
-//            R.id.action_settings -> true
-//            else -> super.onOptionsItemSelected(item)
-//        }
-//    }
 }

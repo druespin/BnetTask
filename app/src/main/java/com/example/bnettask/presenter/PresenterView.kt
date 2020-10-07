@@ -1,4 +1,4 @@
-package com.example.bnettask.web
+package com.example.bnettask.presenter
 
 import com.example.bnettask.data.Entry
 

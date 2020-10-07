@@ -1,6 +1,7 @@
-package com.example.bnettask.web
+package com.example.bnettask.presenter
 
 import android.util.Log
+import com.example.bnettask.web.WebRepo
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers

@@ -13,6 +13,7 @@
         android:layout_height="0dp"
         android:textSize="24dp"
         android:gravity="top"
+        android:hint="@string/new_entry"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/buttons" />
@@ -29,7 +30,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="ADD"
+            android:text="@string/add"
             />
 
         <Button
@@ -37,7 +38,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="CANCEL"
+            android:text="@string/cancel"
             />
 
     </LinearLayout>

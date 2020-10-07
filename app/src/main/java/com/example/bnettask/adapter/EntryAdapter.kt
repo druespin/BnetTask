@@ -6,11 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bnettask.R
 import com.example.bnettask.data.Entry
-import com.example.bnettask.date.DateParser
+import com.example.bnettask.util.DateParser
 import kotlinx.android.synthetic.main.entry_view.view.*
-import java.sql.Date
-import java.sql.Timestamp
-import java.text.SimpleDateFormat
 
 class EntryAdapter(private val itemsList: ArrayList<Entry>,
                    private val listener: ItemClickListener) :

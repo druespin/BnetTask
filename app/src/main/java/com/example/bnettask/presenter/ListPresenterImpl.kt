@@ -1,9 +1,9 @@
-package com.example.bnettask.web
+package com.example.bnettask.presenter
 
 
 import com.example.bnettask.data.Entry
 import com.example.bnettask.data.EntryResponse
-import io.reactivex.Observable
+import com.example.bnettask.web.WebRepo
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -28,7 +28,7 @@ class ListPresenterImpl(private val listView: ListView) : ListPresenter {
                 }
             }
                 .flatMap {
-                    getNoteResponse(it.data.sessionId)
+                    getEntriesResponse(it.data.sessionId)
                 }
                 .subscribe({
                     showDataLogic(it.data[0])
@@ -51,7 +51,7 @@ class ListPresenterImpl(private val listView: ListView) : ListPresenter {
                     }))
     }
 
-    private fun getNoteResponse(sessionId: String): Single<EntryResponse> =
+    private fun getEntriesResponse(sessionId: String): Single<EntryResponse> =
         api.getEntries(sessionId, GET_ENTRIES)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

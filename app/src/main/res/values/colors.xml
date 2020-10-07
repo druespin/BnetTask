@@ -5,5 +5,6 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="colorBody">#BEC3C2</color>
     <color name="colorRemove">#916C6C</color>
+    <color name="cardBG">#D2EDD4</color>
     <color name="white">#FFD</color>
 </resources>

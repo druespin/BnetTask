@@ -1,4 +1,4 @@
-package com.example.bnettask.date
+package com.example.bnettask.util
 
 import java.sql.Date
 

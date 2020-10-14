@@ -3,11 +3,12 @@
 
     <!-- Strings used for fragments for navigation -->
 
-    <string name="cancel_btn">НАЗАД</string>
+    <string name="cancel_btn_text">НАЗАД</string>
     <string name="no_data_message">ДАННЫХ НЕ ОБНАРУЖЕНО\n СОЗДАЙТЕ НОВУЮ ЗАПИСЬ\n С ПОМОЩЬЮ КНОПКИ ДОБАВИТЬ</string>
     <string name="updated_text">Изменено:</string>
-    <string name="created_text">Создано</string>
-    <string name="add">СОХРАНИТЬ</string>
+    <string name="created_text">Создано:</string>
+    <string name="save_text">СОХРАНИТЬ</string>
     <string name="cancel">ОТМЕНА</string>
     <string name="new_entry">новая запись</string>
+    <string name="remove_btn_text">УДАЛИТЬ</string>
 </resources>

@@ -66,34 +66,50 @@
                 tools:text="01-01-2010"/>
         </LinearLayout>
 
-        <TextView
+        <EditText
             android:id="@+id/details_body"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/updated_date"
-            app:layout_constraintBottom_toTopOf="@id/details_cancel_btn"
-            android:background="@drawable/body_text_bg"
-            android:textSize="20dp"
-            android:textColor="@color/white"
-            android:layout_margin="20dp"
-            android:padding="12dp"
+            app:layout_constraintBottom_toTopOf="@id/details_edit_btn"
+            style="@style/EditBodyStyle"
             tools:text="new entry"
             />
 
-            <Button
-                android:id="@+id/details_cancel_btn"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_margin="20dp"
-                android:text="@string/cancel_btn"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:background="@drawable/btn_cancel"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                />
+        <Button
+            android:id="@+id/details_edit_btn"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/details_body"
+            android:textColor="@color/gray"
+            android:enabled="false"
+            style="@style/EditButtonStyle"
+            />
+
+        <Button
+            android:id="@+id/details_remove_btn"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/details_edit_btn"
+            style="@style/RemoveButtonStyle"
+            />
+
+        <Button
+            android:id="@+id/details_cancel_btn"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_margin="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/details_remove_btn"
+            app:layout_constraintBottom_toBottomOf="parent"
+            style="@style/CancelButtonStyle"
+            />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

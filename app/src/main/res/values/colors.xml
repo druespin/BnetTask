@@ -7,4 +7,6 @@
     <color name="colorRemove">#916C6C</color>
     <color name="cardBG">#D2EDD4</color>
     <color name="white">#FFD</color>
+    <color name="gray">#C8C8C0</color>
+    <color name="colorSaveButton">#E4D8B4</color>
 </resources>

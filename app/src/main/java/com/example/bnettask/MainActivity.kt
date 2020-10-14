@@ -77,6 +77,7 @@ class MainActivity : AppCompatActivity(), ItemClickListener, ListView {
     }
 
     override fun showEntries(entries: List<Entry>) {
+        no_data_view.visibility = View.GONE
         adapter.setNewData(entries)
     }
 

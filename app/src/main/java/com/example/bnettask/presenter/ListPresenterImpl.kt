@@ -4,6 +4,7 @@ package com.example.bnettask.presenter
 import com.example.bnettask.data.Entry
 import com.example.bnettask.data.EntryResponse
 import com.example.bnettask.web.WebRepo
+import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -27,6 +28,7 @@ class ListPresenterImpl(private val listView: ListView) : ListPresenter {
                     listView.saveSessionId(it.data.sessionId)
                 }
             }
+                .toObservable()
                 .flatMap {
                     getEntriesResponse(it.data.sessionId)
                 }
@@ -51,7 +53,7 @@ class ListPresenterImpl(private val listView: ListView) : ListPresenter {
                     }))
     }
 
-    private fun getEntriesResponse(sessionId: String): Single<EntryResponse> =
+    private fun getEntriesResponse(sessionId: String): Observable<EntryResponse> =
         api.getEntries(sessionId, GET_ENTRIES)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

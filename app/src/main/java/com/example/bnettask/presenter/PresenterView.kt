@@ -27,3 +27,23 @@ interface AddEntryPresenter {
 
     fun onStop()
 }
+
+interface EditView {
+
+    fun onEditSaved()
+
+    fun onEditRemoved()
+
+    fun showOnError(error: String)
+}
+
+interface EditRemovePresenter {
+
+    fun editEntry(sessionId: String, id: String, body: String)
+
+    fun removeEntry(sessionId: String, id: String)
+
+    fun getData(sessionId: String)
+
+    fun onStop()
+}

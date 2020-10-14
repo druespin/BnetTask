@@ -20,7 +20,7 @@ interface ApiService {
     fun getEntries(
         @Field("session") sessionId: String,
         @Field("a") method: String
-    ): Single<EntryResponse>
+    ): Observable<EntryResponse>
 
     @POST(".")
     @FormUrlEncoded
@@ -31,10 +31,19 @@ interface ApiService {
     ): Completable
 
     @POST(".")
+    @FormUrlEncoded
     fun editEntry(
         @Field("session") sessionId: String,
-        @Field("id") noteId: String,
         @Field("a") method: String,
+        @Field("id") entryId: String,
         @Field("body") body: String
+    ): Completable
+
+    @POST(".")
+    @FormUrlEncoded
+    fun removeEntry(
+        @Field("session") sessionId: String,
+        @Field("a") method: String,
+        @Field("id") entryId: String
     ): Completable
 }
